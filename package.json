@@ -1,0 +1,25 @@
+{
+  "name": "b3-stock-tracker",
+  "version": "1.0.0",
+  "description": "Dashboard for tracking B3 stocks with swing trading focus and profit analysis",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "b3",
+    "stocks",
+    "trading",
+    "dashboard",
+    "swing-trading"
+  ],
+  "author": "Caroline Silva",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "node-cache": "^5.1.2"
+  }
+}
