@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B3 Stock Tracker - Dashboard de Swing Trading</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>
+                    <span class="logo">📈</span>
+                    B3 Stock Tracker
+                </h1>
+                <p class="subtitle">Dashboard de Análise para Swing Trading - Foco em Lucros &gt; 7%</p>
+            </div>
+            <div class="header-actions">
+                <button id="notificationBtn" class="btn btn-outline">
+                    <span id="notificationIcon">🔔</span>
+                    Ativar Notificações
+                </button>
+                <button id="refreshBtn" class="btn btn-primary">
+                    <span id="refreshIcon">🔄</span>
+                    Atualizar
+                </button>
+            </div>
+        </header>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+            <strong>⚠️ Aviso:</strong> Este dashboard é apenas para fins informativos e educacionais. Não constitui recomendação de investimento. 
+            Consulte sempre um profissional antes de investir. Investimentos em ações envolvem riscos.
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <div class="card-value" id="totalStocks">-</div>
+                    <div class="card-label">Ações Monitoradas</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <div class="card-content">
+                    <div class="card-value" id="opportunities">-</div>
+                    <div class="card-label">Oportunidades &gt;7%</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">📈</div>
+                <div class="card-content">
+                    <div class="card-value" id="bullish">-</div>
+                    <div class="card-label">Tendência de Alta</div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-icon">📉</div>
+                <div class="card-content">
+                    <div class="card-value" id="bearish">-</div>
+                    <div class="card-label">Tendência de Baixa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="controls">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Buscar ação por ticker (ex: PETR4, VALE3)..."
+                    class="search-input"
+                >
+                <button id="searchBtn" class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="filters">
+                <label>
+                    <input type="checkbox" id="filterOpportunities" checked>
+                    <span>Mostrar apenas oportunidades &gt;7%</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="filterBullish">
+                    <span>Apenas tendência de alta</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Carregando dados das ações...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="error-message" style="display: none;">
+            <span class="error-icon">⚠️</span>
+            <span id="errorText"></span>
+        </div>
+
+        <!-- Stocks Table -->
+        <div class="table-container">
+            <table class="stocks-table">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>Nome</th>
+                        <th>Preço Atual</th>
+                        <th>Variação Dia</th>
+                        <th>Variação Semana</th>
+                        <th>Variação Mês</th>
+                        <th>Potencial</th>
+                        <th>Tendência</th>
+                        <th>Volume</th>
+                        <th>Análise</th>
+                    </tr>
+                </thead>
+                <tbody id="stocksTableBody">
+                    <!-- Stocks will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Opportunities Highlight Section -->
+        <div id="opportunitiesSection" class="opportunities-section" style="display: none;">
+            <h2>🎯 Oportunidades em Destaque (Potencial &gt; 7%)</h2>
+            <div id="opportunitiesGrid" class="opportunities-grid">
+                <!-- Opportunity cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 B3 Stock Tracker | Dados fornecidos por <a href="https://brapi.dev" target="_blank">Brapi</a></p>
+            <p>Última atualização: <span id="lastUpdate">-</span></p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/notifications.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
