@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B3 Stock Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .stock {
+            border: 1px solid #ccc;
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .notification {
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>B3 Stock Tracker Dashboard</h1>
+    </header>
+    <main id="main-content">
+        <h2>Stocks with +7% Profit Potential</h2>
+        <div id="stocks"></div>
+    </main>
+
+    <script>
+        const apiUrl = 'https://api.brapi.dev/api/v2/stocks';
+        
+        function fetchStocks() {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const stocks = data.results.filter(stock => stock.profitPotential >= 7);
+                    displayStocks(stocks);
+                })
+                .catch(error => console.error('Error fetching stocks:', error));
+        }
+
+        function displayStocks(stocks) {
+            const stocksDiv = document.getElementById('stocks');
+            stocksDiv.innerHTML = '';
+            stocks.forEach(stock => {
+                const stockDiv = document.createElement('div');
+                stockDiv.className = 'stock';
+                stockDiv.innerHTML = `<h3>${stock.name}</h3><p>Profit Potential: ${stock.profitPotential}%</p>`;
+                stocksDiv.appendChild(stockDiv);
+
+                if (stock.profitPotential >= 7) {
+                    notifyUser(stock);
+                }
+            });
+        }
+
+        function notifyUser(stock) {
+            if (Notification.permission === 'granted') {
+                new Notification(`Trading Opportunity! ${stock.name} has a profit potential of ${stock.profitPotential}%`);
+            }
+        }
+
+        Notification.requestPermission();
+        fetchStocks();
+        setInterval(fetchStocks, 300000); // Update every 5 minutes
+    </script>
+</body>
+</html>
