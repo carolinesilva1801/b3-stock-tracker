@@ -63,6 +63,9 @@ function formatBRL(value) {
  * @returns {string} Formatted percentage
  */
 function formatPercentage(value) {
+    if (value === null || value === undefined || isNaN(value)) {
+        return '0.00%';
+    }
     const sign = value >= 0 ? '+' : '';
     return `${sign}${value.toFixed(2)}%`;
 }

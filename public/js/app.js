@@ -41,6 +41,13 @@ class StockTracker {
             }
         });
 
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (this.autoRefreshInterval) {
+                clearInterval(this.autoRefreshInterval);
+            }
+        });
+
         // Filter checkboxes
         document.getElementById('filterOpportunities')?.addEventListener('change', () => {
             this.applyFilters();
@@ -88,7 +95,7 @@ class StockTracker {
         const query = searchInput.value.trim();
 
         if (!query || query.length < 2) {
-            alert('Digite pelo menos 2 caracteres para buscar');
+            this.showError('Digite pelo menos 2 caracteres para buscar');
             return;
         }
 
